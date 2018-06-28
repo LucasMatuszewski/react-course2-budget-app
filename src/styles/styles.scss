@@ -1,0 +1,152 @@
+//////////////////
+// SCSS / Less //
+////////////////
+
+// ******* Variables ***********
+// We can use it in many places in CSS, and change only in one place to make changes in many places.
+// Variables has to be set before all styles using this variables.
+/* $header-background: #20222b;
+$header-title: white;
+$header-subtitle: #a5afd7; */
+// Keep your variables in separate file: base/_settings.scss
+
+
+/****** @import *********
+Split one big (s)css to many files and @import scss files
+    1. Create a folder /styles/base/ and file _base.scss - for general/global styles for App
+        This file is a partial, and partials names start with underscore _partial.scss
+        We use partials also for Express templates
+    2. Create a folder /styles/components for component specific styles.
+        e.g. _header.scss (a name should be the same as component name)
+    3. Use @import in main .scss file: */
+@import './base/settings'; //file with variables - have to be before styles using this variables
+@import './base/base'; //for partials we don't use file extension and underscore _partial.scss
+@import './components/container'; //container for all blocks we want to center and have a max-width
+
+/*  4. Inside components/header.js in JSX for container div use: <div className="header"> */
+
+
+// ******* REM ***********
+// Use rem in place of PX (pixels) for spacing and font-size.
+// It's better for accessibility, allow user to customize app.
+// we can see computed (obliczoną) value in px inside Chrome DevTools > Elements > Computed (on selected element)
+// by default 1rem = 16px. But we used to use px and its easier, so...
+// in SCSS we can use selectors to automatically calculate rem.
+// in _base.scss use: html { font-size: 62.5% } = 16px *0,625 = 10px
+// from now: 1 rem = 10px, 2.2 rem = 22px
+
+
+/****** CSS Reset *******
+Make sure that all browsers start in the same place (replace default browsers styles).
+Without it our app won't look the same on different browsers.
+Reset is a lot of code, so we will use Normalize.css (used by Twitter, GitHub, Bootstrap etc.)
+https://github.com/necolas/normalize.css/ (31 368 STARS)
+1. npm i normalize.css
+2. import it to our main app.js file, ABOVE OUR STYLES (reset first):
+    import 'normalize.css/normalize.css';
+3. make sure that in webpack.config.js module>rules are set to use both css and scss (RegExp: /\.s?css$/ )
+*/
+
+/***** Sass Functions *******
+http://sass-lang.com/documentation/Sass/Script/Functions.html
+We can use functions inside SCSS files to modify values/variables.
+e.g. darken(color, %) in _button.scss:
+.big-button { border-bottom: .6rem solid darken($purple, 10%); }
+darken is one of HSL functions (Hue, Saturate, Lighten)
+We have also opacity / alpha functions and many more.
+*/
+
+/* NESTING SELECTORS - in _header.scss more about it */
+
+
+/*********************
+* CSS METHODOLOGIES *
+********************
+* https://survivejs.com/react/advanced-techniques/styling-react/
+* https://reactjs.org/docs/faq-styling.html
+*/
+
+/*** BEM (Block Element Modifier) ******************************
+Naming convention / Name spacing for Classes - created by Yandex.ru: http://getbem.com/
+Because nesting selectors can bring some specificity issues, its better to use BEM, like:
+.header__title (for h1 titles inside .header class)
+
+Block - big building element, like a header, footer, menu, 
+Elements - things inside blocks which make them useful, like h1=title
+
+We have to use ClassName for this h1 element, and for every element we want to style.
+We don't use nested selectors, nor cascading.
+We use:
+.header__h1
+in place of traditional cascade css:
+.header h1
+
+Nesting BEM with Sass:
+https://csswizardry.com/2016/11/nesting-your-bem/
+
+Naming Conventions: https://cssguidelin.es/#naming-conventions
+
+10 common problems with BEM:
+https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/
+ */
+
+ /**** CSS Modules *********
+ * https://github.com/css-modules/css-modules (9946 STARS)
+ * implemented in webpack css-loader - so we don't need any new tools!!!
+ * Starts from the premise that CSS rules should be local by default.
+ * Allows us to develop CSS as we've been used to, but in a safer, local context by default.
+ * Gives separation of modules like in BEM, but without long names.
+ * Provides a balance between what people are familiar with and what React specific libraries do.
+ *
+ * Something between traditional CSS, BEM and CSS-in-JS.
+ * Automatically produce a html tags and css files with class's like in BEM: table__td__HASH
+ * 
+ * FOR REACT: https://github.com/gajus/react-css-modules (4616 STARS)
+ *   > babel: https://github.com/gajus/babel-plugin-react-css-modules
+ */
+
+/**** CSS-in-JS *********
+* Use CSS inside React JS Components (locally, inline, not in external files). Easier to use and maintain.
+* CONS:
+    * CSS classes are generally better for performance than inline styles!!!
+    * Most of designers don't know CSS-in-JS and React, but know well CSS, Sass/SCSS
+    * You will need many additional plugins, Linters won't work,
+    * Sass / PostCSS will not work any more
+    * harder debugging + bug will crash an app (in CSS will not) 
+    * You cannot cache separately css and js
+    * website will not render until styled components finish it's work
+    * "Shadow DOM" will make CSS much better!!!
+* PROS:
+    * Scoped styles without selectors
+    * Avoids specificity conflicts
+    * Source order independence
+    * Dead code elimination
+    * Highly expressive
+    * Can be used in React-Native Apps (CSS files can't) <-- best option !
+* 
+*
+* Most popular tool in CSS-in-JS methodology:
+*
+******* STYLED COMPONENTS ********
+* https://www.styled-components.com/docs/basics#getting-started
+* https://github.com/styled-components/styled-components (17008 STARS !!!)
+* https://www.npmjs.com/package/styled-components (215 843 weekly downloads)
+*
+*
+* Some other popular libraries for CSS-in-JS:
+        * Radium - https://github.com/FormidableLabs/radium (6345 STARS)
+            https://www.npmjs.com/package/radium (177 577 weekly downloads)
+        * Styled JSX - https://github.com/zeit/styled-jsx (3239 STARS)
+            https://www.npmjs.com/package/styled-jsx (39 155 weekly downloads)
+* 
+* Comparison of many scc-in-js techniques for React: https://github.com/MicheleBertoli/css-in-js
+*/
+
+/* 
+* Why BEM and Module CSS is better then CSS-in-JS:
+* https://reactarmory.com/answers/should-i-use-css-in-js
+* https://medium.com/@gajus/stop-using-css-in-javascript-for-web-development-fa32fb873dcc
+*/
+
+
+

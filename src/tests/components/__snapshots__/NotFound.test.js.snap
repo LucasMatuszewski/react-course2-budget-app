@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Not Found - Error 404 1`] = `
+<div>
+  Error 404 - 
+  <Link
+    replace={false}
+    to="/"
+  >
+    go to help page
+  </Link>
+</div>
+`;

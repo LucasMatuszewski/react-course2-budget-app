@@ -1,0 +1,28 @@
+// CSS RESET - remember to import normalize.css in app.js before we use our styles
+
+html { font-size: 62.5% }
+// 1rem by default = 16px.
+// 16px *0,625 = 10px.
+// from now 2.2 rem = 22px, 1 rem = 10 px, 1.6rem = 16px, etc.
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size; // =16px
+}
+
+h1 { // .header__title class is more specific - so h1 wont be 2.2rem. It use class value.
+    font-size: 2.2rem; // =22px (because we use: html { font-size: 62.5% } = 1 rem = 16px *0,625 = 10px )
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    color: red;
+    margin: 0 10px;
+}

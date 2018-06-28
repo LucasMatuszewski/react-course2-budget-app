@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header correctly 1`] = `
+<div>
+  <h1>
+    Expenses App
+  </h1>
+  <NavLink
+    activeClassName="is-active"
+    activeStyle={
+      Object {
+        "color": "red",
+        "fontWeight": "bold",
+      }
+    }
+    aria-current="page"
+    exact={true}
+    title="test"
+    to="/"
+  >
+    Dashboard
+  </NavLink>
+   | 
+  <NavLink
+    activeClassName="is-active"
+    activeStyle={
+      Object {
+        "color": "red",
+        "fontWeight": "bold",
+      }
+    }
+    aria-current="page"
+    title="test"
+    to="/create"
+  >
+    Add Expense
+  </NavLink>
+  | 
+  <NavLink
+    activeClassName="is-active"
+    activeStyle={
+      Object {
+        "color": "red",
+        "fontWeight": "bold",
+      }
+    }
+    aria-current="page"
+    title="test"
+    to="/help"
+  >
+    Help
+  </NavLink>
+  <br />
+   
+  <hr />
+</div>
+`;

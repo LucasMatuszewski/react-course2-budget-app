@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Budget App</title>
+    <!-- Viewport - for Mobile devices to use real devices width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/ico" href="/images/favicon.ico" />
+
+</head>
+<body>
+    <!-- We can see saved changes in this file Live in a browser with command:
+        
+        live-server public (folder name).
+        
+        We have to install it previously: npm i -g live-server -->
+    
+        <div id="app"></div> <!-- Component from React to put some data (it have to be before React-DOM) -->
+        
+        <!-- LINKS WITHOUT WEBPACK, USING ONLY BABEL: -->
+        <!-- CDN links for quick demonstration (normally we will use WebPack and install React locally) -->
+        <!-- <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+        <script src="scripts/app.js"></script> -->
+
+        <!-- WITH WEBPACK: -->
+        <!-- WE NEED ONLY ONE FILE - WEBPACK ADDS REACT & other libraries to our bundle.js file. It also send CSS to a browser -->
+        <script src="/bundle.js"></script>
+
+</body>
+</html>

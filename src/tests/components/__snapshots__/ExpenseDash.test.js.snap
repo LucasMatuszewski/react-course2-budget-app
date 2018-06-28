@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Expenses Dashboard with Filters and List components 1`] = `
+<div>
+  <h2>
+    Expenses Dashboard
+  </h2>
+  <Connect(ExpenseListFilters) />
+  <Connect(ExpenseList) />
+   
+  <br />
+  <hr />
+  <a
+    href="/help"
+  >
+    Server Side Rendering HTML Link
+  </a>
+  <br />
+  (html "a" tag will reload a browser, we can use it to link to external page)
+</div>
+`;
