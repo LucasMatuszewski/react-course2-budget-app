@@ -13,10 +13,13 @@
 > Git add .
 
 3. After Git add our files changes are Staged and ready to Commit
-> git commit
+> git commit -m "MESSAGE"
 
 4. Commited files (many versions/commits from a past)
 
+
+Working tree = your actual files we are working on in a project
+Working tree clean = all changes commited
 
 ## .gitignore
 add in this file names of folders and files to ignore, one in each line:

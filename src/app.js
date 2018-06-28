@@ -31,6 +31,9 @@ import 'react-dates/lib/css/_datepicker.css'; // obligatory CSS for react-dates
 // get store (state tree) and save it in value "store" 
 const store = configureStore(); // it give us access to Redux methods (dispatch, subscribe, getState)
 
+
+// ON PRODUCTION WE DON'T NEED FOLLOWING INITIAL DATA AND TO USE SELECTOR (getV.E.) HERE TO ADD THEM TO STATE
+/* 
 // SUBSCRIBE HAS TO BE BEFORE ACTIONS
 // Subscribe to watch changes on our data Store / State Tree
 store.subscribe(() => {
@@ -46,6 +49,8 @@ store.dispatch(addExpense({ description: 'coffee', amount: 600, note: 'Starbucks
 store.dispatch(addExpense({ description: 'water', amount: 300, note: 'No from plastic!', createdAt: 1515256105000 }));
 
 store.dispatch(setTextFilter(''));
+ */
+
 
 // <Provider> is a HOC ??? We provide a store to <AppRouter /> component.
 const jsx = (
