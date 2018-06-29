@@ -58,7 +58,7 @@ module.exports = (env) => {
         devtool: isProduction ? 'source-map' : 'inline-source-map', // little slower then 'cheap-module-eval-source-map' but give us better mapping on Development
         devServer: {
             contentBase: path.join(__dirname, 'public'),
-            historyApiFallback: true
+            historyApiFallback: true // we tell webpack-dev-server to use 'public' folder even when user click backward in a browser
         }
     };
 };

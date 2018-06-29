@@ -12,10 +12,13 @@
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --pressets=env,react --watch",
     "server": "http-server public",
     "dev-server": "webpack-dev-server",
-    "test": "jest --watchAll --config=jest.config.json"
+    "test": "jest --watchAll --config=jest.config.json",
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
     "debug": "^3.1.0",
+    "express": "^4.16.3",
     "identity-obj-proxy": "^3.0.0",
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
