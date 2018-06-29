@@ -9,6 +9,10 @@ module.exports = (env) => {
     return {
         // entry: './src/lessons/higherOrderComp.js',
         entry: './src/app.js', //base file of our app, connecting to other filles
+        output: {
+            path: path.join(__dirname, 'public', 'dist'),
+            filename: 'bundle.js'
+        },
         module: {
             rules: [
                 {
@@ -51,14 +55,11 @@ module.exports = (env) => {
             }), */
             CSSExtract
         ],
-        output: {
-            path: path.join(__dirname, 'public'),
-            filename: 'bundle.js'
-        },
         devtool: isProduction ? 'source-map' : 'inline-source-map', // little slower then 'cheap-module-eval-source-map' but give us better mapping on Development
         devServer: {
             contentBase: path.join(__dirname, 'public'),
-            historyApiFallback: true // we tell webpack-dev-server to use 'public' folder even when user click backward in a browser
+            historyApiFallback: true, // we tell webpack-dev-server to use 'public' folder even when user click backward in a browser
+            publicPath: '/dist/' // we tell devServer where we want to have our public static assets (like bundle.js)
         }
     };
 };

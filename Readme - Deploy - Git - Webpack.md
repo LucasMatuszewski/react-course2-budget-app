@@ -13,6 +13,11 @@
 3. After Git add our files changes are Staged and ready to Commit
 > git commit -m "MESSAGE"
 
+We can commit with a shortcut:
+> git commit -am "MESSAGE"
+-a flag will automatically add all unstaged modified filles, but will not add new files (not tracked).
+
+
 4. Commited files (many versions/commits from a past)
 
 
@@ -30,6 +35,8 @@ Check a status of files in our repository:
 
 Check log of recent commits
 > git log
+
+
 
 ## SSH Key - with GIT BASH - Connect with Github.com
 Using the SSH protocol, you can connect and authenticate to remote servers and services. With SSH keys, you can connect to GitHub without supplying your username or password at each visit.
@@ -101,6 +108,8 @@ to push our repository to github
 > git push
 SHORTCUT to push to default remote repository
 (if our id_rsa SSH Key have a password, we have to type it, or we can configure ssh-agent to do it)
+
+
 
 # Production Webpack
 https://webpack.js.org/guides/production/ (more up to date instruction for newer version)
@@ -277,5 +286,63 @@ First time its slow. Next time Heroku will cached many files.
 Now it's possible, that some dependencies would not be in yarn.lock....... it could not work...
 There is to many of dependencies to check it manually....
 I will use yarn.lock and delete package-lock.json (I will have a copy in GIThub repo)
-I have to commit again (Heroku use GIT):
+I have to add changes and commit again (Heroku use GIT). Next we push to heroku.
 
+10. We can use our app :)
+https://udemy-react-2-budget.herokuapp.com/
+
+HEROKU LOGS - to check for some errors to debug.
+> heroku logs
+
+
+# DevDependencies vs (Production) Dependencies
+
+We don't want to instal on Heroku for Production all dependencies. Heroku will use only some of them.
+W should use as DevDependencies:
+- enzyme - only for testing, we do tests locally on development
+- enzyme-to-json
+- jest
+- live-server (we will not use it any more on dev too. We have Webpack-Dev-Server)
+    - remove also script "serve" for live-server
+- react-test-render
+- webpack-dev-server
+
+
+**IMPORTANT:**
+Babel, webpack and loaders for css/scss should be installed on Heroku, because we wont to build our app on a server. I have them in DevDependencies on my package.json, so Heroku should not install them (and heroku didn't - I checked in node_modules on Heroku server). BUT HEROKU USED BABEL AND WEBPACK NORMALLY on git push and builded app with them! Did it use Globally installed instances of this dependencies??? DO WE REALLY NEED THEM LOCALLY ON APP DEPENDENCIES? We don't have a control over version of Webpack/Babel which is used to build our App, so maybe thats why we should use locally installed versions, to have control and to lower risk of bugs.
+
+
+TO INSTALL ONLY PRODUCTION DEPENDENCIES after cloning a project use in terminal:
+> yarn install --production
+(we usually install all dependencies locally, and production dependencies on a server)
+
+
+
+## /public/dist/ or /public/assets/ directory for css and js files
+To make it more clear its better to move bundle.js and styles.css with their maps from public to public/dist/. We have to set this directory on index.html in tags <link> and <script>.
+
+And we have to change it in webpack.config.js:
+> output: { path: path.join(__dirname, 'public', 'dist'), ... } // join public + dist = public/dist
+> devServer: { ..., publicPath: '/dist/' }
+https://webpack.js.org/configuration/dev-server/#devserver-publicpath-
+The bundled files will be available in the browser under this path (by default the publicPath is "/")
+
+We don't need to create this directory. Webpack will do it on Build.
+DevServer don't create real production assets so it won't create this files in dist directory, but it will simulate them in this directory (we can check on Chrome DevTools)
+
+Popular names for this directory are:
+/assets
+/dist
+/styles + /js (but probably not with React and Babel)
+
+Now we can set in **gitignore** file only a directory containing all files to ignore:
+public/dist
+
+We can check if everything still works:
+> yarn run build:prod
+> yarn start // shortcut from yarn run start
+and check on localhost/3000
+
+If everything is fine, we can commit with a shortcut:
+> git commit -am "MESSAGE"
+-a flag will automatically add all unstaged modified filles, but will not add new files (not tracked).
