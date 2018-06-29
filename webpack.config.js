@@ -1,44 +1,66 @@
 const path = require('path');
 // const WorkboxPlugin = require('workbox-webpack-plugin'); //Progressive Web Application
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // Extract CSS from Bundle.js
 
-module.exports = {
-    // entry: './src/lessons/higherOrderComp.js',
-    entry: './src/app.js', //base file of our app, connecting to other filles
-    /*  plugins: [
-        new WorkboxPlugin.GenerateSW({
-            // these options encourage the ServiceWorkers to get in there fast 
-            // and not allow any straggling "old" SWs to hang around
-            swDest: 'sw.js',
-            clientsClaim: true,
-            skipWaiting: true,
-            runtimeCaching: [{
-                urlPattern: new RegExp('http://localhost:8080/'),
-                handler: 'staleWhileRevalidate'
-            }]
-        })
-    ], */
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.(s*)css$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
-            }
-        ]
-    },
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
-    },
-    devtool: 'cheap-module-eval-source-map',
-    devServer: {
-        contentBase: path.join(__dirname, 'public'),
-        historyApiFallback: true
-    }
+module.exports = (env) => {
+    console.log('env:', env); // check environment value (by default undefined. Change to: dev / prod)
+    const isProduction = env === 'production'; // we can use turnery operator to generate something else for production
+    const CSSExtract = new ExtractTextPlugin('styles.css'); // file name to extract CSS (why in documentation they use it in plugins: [] )
+    return {
+        // entry: './src/lessons/higherOrderComp.js',
+        entry: './src/app.js', //base file of our app, connecting to other filles
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.(s*)css$/,
+                    use: CSSExtract.extract({
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    sourceMap: true
+                                }
+                            },
+                            {
+                                loader: 'sass-loader',
+                                options: {
+                                    sourceMap: true
+                                }
+                            }
+                        ]
+                    }) // we dont use style-loader = it was to load css to a bundle.js (we won't do it)
+                }
+            ]
+        },
+        plugins: [
+            /* new WorkboxPlugin.GenerateSW({
+                // these options encourage the ServiceWorkers to get in there fast 
+                // and not allow any straggling "old" SWs to hang around
+                swDest: 'sw.js',
+                clientsClaim: true,
+                skipWaiting: true,
+                runtimeCaching: [{
+                    urlPattern: new RegExp('http://localhost:8080/'),
+                    handler: 'staleWhileRevalidate'
+                }]
+            }), */
+            CSSExtract
+        ],
+        output: {
+            path: path.join(__dirname, 'public'),
+            filename: 'bundle.js'
+        },
+        devtool: isProduction ? 'source-map' : 'inline-source-map', // little slower then 'cheap-module-eval-source-map' but give us better mapping on Development
+        devServer: {
+            contentBase: path.join(__dirname, 'public'),
+            historyApiFallback: true
+        }
+    };
 };
 
 // we can run this file in console to get path:
