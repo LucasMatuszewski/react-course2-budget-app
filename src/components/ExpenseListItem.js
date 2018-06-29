@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import numeral from 'numeral';
 /* // REFACTOR: move "remove" button to EditExpense.js (connect & removeEx no more needed here)
 import { connect } from 'react-redux';
 import { removeExpense } from '../actions/expenses'; */
@@ -23,9 +25,23 @@ const ExpenseListItem = ({ id, description, amount, createdAt, note}) => (
             <h3>{description}</h3>
         </Link>
         <p>
+            {/* // MY VERSION WITHOUT MOMENT() ==> Date().toLocaleDateString()
             {(amount / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })}
             , {(new Date(createdAt)).toLocaleDateString()}<br />
-            note: {note}
+            note: {note} */}
+            
+            {/* // UDEMY VERSION: */}
+            { numeral(amount / 100).format('$0,0.00') 
+                // http://numeraljs.com/
+
+                // Udemy's instructor use Module: Numerl.js - but why???
+                // toLocaleString and toLocaleDateString works fine. Why use external libraries?
+                // It only make a bundle.js bigger...
+            }
+             - 
+            { moment(createdAt).format('MMMM Do, YYYY') // June 30th, 2018
+                // https://momentjs.com/docs/#/displaying/format/
+            }
         </p>
 
         {/* REFACTOR: move "remove" button to EditExpense.js */}

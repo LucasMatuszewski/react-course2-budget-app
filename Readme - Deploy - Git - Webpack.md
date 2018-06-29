@@ -340,9 +340,21 @@ public/dist
 
 We can check if everything still works:
 > yarn run build:prod
-> yarn start // shortcut from yarn run start
+> yarn start // shortcut for: > yarn run start
 and check on localhost/3000
 
 If everything is fine, we can commit with a shortcut:
 > git commit -am "MESSAGE"
 -a flag will automatically add all unstaged modified filles, but will not add new files (not tracked).
+
+
+
+# Libraries / Modules:
+for number formating: http://numeraljs.com
+    for i18n: http://numeraljs.com/#locales
+for date formating: https://momentjs.com/
+
+But why to use this modules ???
+**toLocaleString** and **toLocaleDateString** works fine.
+Why Udemy instructor used external libraries?
+It only make a bundle.js bigger...
