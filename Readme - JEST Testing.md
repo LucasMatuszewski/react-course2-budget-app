@@ -359,3 +359,18 @@ Example tests for list of trainers:
 7. ...
 
 You can try to refactor your code to make it more optimized. Yo have a reference: Tests must to pass
+
+
+# REDUX Asynchronous Actions - TESTS with Redux Mock Store
+We have to install a middleware to test Async Actions in Redux:
+https://github.com/dmitry-zaets/redux-mock-store
+
+It could test synchronous actions and middleware too
+
+
+# IMPORTANT:
+# I DIDN'T END THIS PART OF COURSE (SECTION 15):
+# https://www.udemy.com/react-2nd-edition/learn/v4/t/lecture/7900264?start=0
+
+
+# Creating a separate TEST DATABASE for Development
