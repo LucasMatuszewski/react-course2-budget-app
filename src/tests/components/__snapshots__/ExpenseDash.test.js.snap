@@ -5,6 +5,7 @@ exports[`should render Expenses Dashboard with Filters and List components 1`] =
   <h2>
     Expenses Dashboard
   </h2>
+  <Connect(ExpensesSummaryUdemy) />
   <Connect(ExpenseListFilters) />
   <Connect(ExpenseList) />
    

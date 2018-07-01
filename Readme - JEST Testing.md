@@ -32,9 +32,25 @@ We can leave jest without --watch in package.json and run special command:
 > --watch is not supported without git/hg, please use --watchAll
 https://github.com/cosmin/git-hg
 
+BUT --watch is working now.
 
 4. add new folder and file (with extension NAME.test.js - Jest is looking for files with this extension, and detect them automatically):
 > src/tests/add.test.js
+
+
+## FLAGS:
+--watch -> runs only tests relative to changed files
+--watchAll -> runs all tests on eny change
+-o --onlyFailures -> runs only failed tests
+-u --updateSnapshot
+--onlyChanged
+--lastCommit -> Run all tests affected by file changes in the last commit made.
+--coverage -> Indicates that test coverage information should be collected and reported in the output.
+--changedSince -> Runs tests related the changes since the provided branch. If the current branch has diverged from the given branch, then only changes made locally will be tested.
+example:
+> yarn test --coverage --changedSince=master
+https://medium.com/@stipsan/thats-for-changes-done-on-uncommitted-files-while-this-post-shows-you-how-to-do-it-for-changes-9312f4bae576
+
 
 ## Add new tests:
 5. Add new test to our add.test.js file:
@@ -313,3 +329,33 @@ For more recent version of react-dates they changed a 'SingleDatePicker' compone
 We have to find an alternative enzyme selector. For Example:
 > find('withStyles(SingleDatePicker)') // Name generated in snapshot for this component
 > find('[onDateChange]')
+
+
+
+# How to make tests faster, and why its worth of time:
+https://medium.com/shyp-engineering/speeding-up-javascript-test-time-1000x-460c528418e7
+
+https://medium.freecodecamp.org/the-right-way-to-test-react-components-548a4736ab22
+
+https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f
+
+
+
+# TEST DRIVEN DEVELOPMENT
+**Write tests FIRST**, before writing functionality (tests are like specification)
+All **tests should Fail** before we write proper code.
+
+We can't do it for snapshot tests.
+But for some functions/components we can thing about cases when it could failed, and write test cases to check this, before we will start to write a real code.
+It will help us to find possible bugs and problems before they will brake our app on production.
+
+Example tests for list of trainers:
+1. Should display Message No Trainers if there are no trainers to display
+2. Should display one trainer's profile if there is only one
+3. Should display list of 5 trainers if there are 5 trainers
+4. Should display first 25 trainers if we have 100 000 trainers to display
+5. Should display proper trainers if there is empty trainer object in array
+6. Should display trainers from London if there is a filter for city: London
+7. ...
+
+You can try to refactor your code to make it more optimized. Yo have a reference: Tests must to pass

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
+import ExpensesSummary from './ExpensesSummary';
 import selectExpenses from '../selectors/expenses';
 
 // REGULAR COMPONENT TO USE INSIDE HOC connect():
@@ -17,6 +18,8 @@ export const ExpenseList = (props) => (
                 ))
             )
         }
+        <ExpensesSummary expenses={props.expenses} />
+        
     </div>
 );
 

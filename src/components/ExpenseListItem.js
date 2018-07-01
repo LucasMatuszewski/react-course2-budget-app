@@ -37,9 +37,7 @@ const ExpenseListItem = ({ id, description, amount, createdAt, note}) => (
                 // Udemy's instructor use Module: Numerl.js - but why???
                 // toLocaleString and toLocaleDateString works fine. Why use external libraries?
                 // It only make a bundle.js bigger...
-            }
-             - 
-            { moment(createdAt).format('MMMM Do, YYYY') // June 30th, 2018
+            } - { moment(createdAt).format('MMMM Do, YYYY') // June 30th, 2018
                 // https://momentjs.com/docs/#/displaying/format/
             }
         </p>

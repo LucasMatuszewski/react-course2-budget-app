@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render ExpenseList with dummy expenses 1`] = `
+exports[`should render ExpenseList with dummy expenses and Total 1`] = `
 <div>
   <h1>
     Expense List
@@ -28,6 +28,32 @@ exports[`should render ExpenseList with dummy expenses 1`] = `
     id="3"
     key="3"
   />
+  <Connect(ExpensesSummaryUdemy)
+    expenses={
+      Array [
+        Object {
+          "amount": 1234,
+          "createdAt": 0,
+          "description": "gum",
+          "id": "1",
+          "note": "",
+        },
+        Object {
+          "amount": 1212341,
+          "createdAt": -345600000,
+          "description": "Rent",
+          "id": "2",
+          "note": "test",
+        },
+        Object {
+          "amount": 4503,
+          "createdAt": 345600000,
+          "description": "Credit Card",
+          "id": "3",
+        },
+      ]
+    }
+  />
 </div>
 `;
 
@@ -39,5 +65,8 @@ exports[`should render ExpenseList with message NO EXPENSES 1`] = `
   <p>
     No expenses
   </p>
+  <Connect(ExpensesSummaryUdemy)
+    expenses={Array []}
+  />
 </div>
 `;
